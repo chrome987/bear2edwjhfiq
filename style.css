@@ -1,0 +1,431 @@
+/* styles.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#effectCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  background-color: #c7d763;
+}
+
+/* Стили для новой кнопки с иконкой */
+.photo-button {
+  width: 4rem;
+  height: 4rem;
+  bottom: 2rem; /* Отступ от нижней грани экрана */
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  cursor: pointer;
+  outline: none; /* Убираем голубой квадрат */
+  -webkit-tap-highlight-color: transparent; /* Убираем синий квадрат на мобильных устройствах */
+  user-select: none; /* Запрещаем выделение текста при нажатии */
+}
+
+.photo-button:focus {
+  outline: none; /* Убираем голубой квадрат при фокусе */
+}
+
+.circle {
+  position: absolute;
+  top: 12%;
+  left: 12%;
+  bottom: 12%;
+  right: 12%;
+  border-radius: 100%;
+  background-color: #ffffff;
+  opacity: 0;
+  transition: all 0.25s;
+}
+
+.ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 100%;
+  border: 4px solid #ffffff;
+  opacity: 0.8;
+  transition: all 0.25s;
+}
+
+/* Убираем hover */
+.photo-button:hover .circle {
+  opacity: 0;
+}
+
+.photo-button:active .ring {
+  opacity: 1;
+}
+
+.photo-button:active .circle {
+  opacity: 1;
+}
+
+.camera-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+
+.overlay {
+  --border-style: 4px solid red;
+  --border-space: 30px;
+
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.overlay-helper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.recording-indicator {
+  display: inline-block;
+  width: 10px;  /* Ширина кружка */
+  height: 10px; /* Высота кружка */
+  background-color: red;
+  border-radius: 50%;
+  margin-right: 5px; /* Отступ справа, чтобы отделить от текста */
+  animation: blink 1s infinite; /* Анимация мигания */
+}
+
+/* Анимация мигания */
+@keyframes blink {
+  0%, 80% {
+      opacity: 1;
+  }
+  80%, 81% {
+      opacity: 0;
+  }
+  81%, 100% {
+      opacity: 1;
+  }
+}
+
+.overlay-element {
+  padding: 20px;
+  width: 150px;
+  height: 100px;
+  position: absolute;
+  pointer-events: auto;
+}
+
+.overlay-text {
+  font-size: 1.75em;
+  color: white;
+  font-family: monospace;
+}
+
+.overlay .top-left,
+.overlay .top-right,
+.overlay .bottom-left,
+.overlay .bottom-right {
+  position: absolute;
+  width: 10%; /* Длина стороны будет 10% от ширины родительского контейнера */
+  height: 10%; /* Высота стороны будет 10% от высоты родительского контейнера */
+  pointer-events: none;
+}
+
+.overlay .top-left {
+  border-left: var(--border-style);
+  border-top: var(--border-style);
+  top: var(--border-space);
+  left: var(--border-space);
+  text-align: left;
+}
+
+.overlay .top-right {
+  border-right: var(--border-style);
+  border-top: var(--border-style);
+  top: var(--border-space);
+  right: var(--border-space);
+  text-align: right;
+}
+
+.overlay .bottom-left {
+  border-left: var(--border-style);
+  border-bottom: var(--border-style);
+  bottom: var(--border-space);
+  left: var(--border-space);
+  text-align: left;
+}
+
+.overlay .bottom-right {
+  border-right: var(--border-style);
+  border-bottom: var(--border-style);
+  bottom: var(--border-space);
+  right: var(--border-space);
+  text-align: right;
+}
+
+
+
+
+.overlay .center-top-left,
+.overlay .center-top-right,
+.overlay .center-bottom-left,
+.overlay .center-bottom-right {
+  position: absolute;
+  width: 7%; /* Размеры уголков */
+  height: 7%;
+  border-color: white; /* Белый цвет границ */
+}
+
+.overlay .center-top-left {
+  border-left: var(--border-style);
+  border-top: var(--border-style);
+  border-color: white;
+  top: 40%;
+  left: 35%;
+  transform: translate(-100%, -100%);
+}
+
+.overlay .center-top-right {
+  border-right: var(--border-style);
+  border-top: var(--border-style);
+  border-color: white;
+  top: 40%;
+  left: 65%;
+  transform: translate(0, -100%);
+}
+
+.overlay .center-bottom-left {
+  border-left: var(--border-style);
+  border-bottom: var(--border-style);
+  border-color: white;
+  top: 60%;
+  left: 35%;
+  transform: translate(-100%, 0);
+}
+
+.overlay .center-bottom-right {
+  border-right: var(--border-style);
+  border-bottom: var(--border-style);
+  border-color: white;
+  top: 60%;
+  left: 65%;
+  transform: translate(0, 0);
+}
+
+
+
+
+.overlay .darken {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3); /* Полупрозрачный черный цвет */
+}
+
+.overlay .darken.top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(50% - 12.6% - 5%); /* Верхняя часть до внутреннего прямоугольника */
+}
+
+.overlay .darken.bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(50% - 12.6% - 5%); /* Нижняя часть от внутреннего прямоугольника */
+}
+
+.overlay .darken.left {
+  top: calc(50% - 12.6%  - 5%);
+  left: 0;
+  width: calc(37%  - 10%); /* Левая часть от внутреннего прямоугольника */
+  height: calc(18.2% + 17%); /* Высота внутреннего прямоугольника */
+}
+
+.overlay .darken.right {
+  top: calc(50% - 12.6% - 5%);
+  right: 0;
+  width: calc(37% - 10%); /* Левая часть от внутреннего прямоугольника */
+  height: calc(18.2% + 17%); /* Высота внутреннего прямоугольника */
+}
+
+
+
+
+
+
+#overlay-bottom-left-text {
+  position: absolute;
+  bottom: var(--border-space);
+  left: var(--border-space);
+}
+
+#overlay-bottom-right-text {
+  position: absolute;
+  bottom: var(--border-space);
+  right: var(--border-space);
+}
+
+
+
+
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2A2A2A; /* Темно-серый цвет для фона */
+  padding: 40px;
+  border: 5px solid #4CAF50; /* Ярко-зеленая рамка */
+  border-radius: 20px;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: #E8F5E9; /* Светло-зеленый цвет текста */
+  font-family: 'Arial', sans-serif;
+  user-select: none; /* Запрещаем выделение текста */
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Анимация плавного появления */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Текст сообщения */
+.modal-text {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* Кнопка в модальных окнах */
+.modal-button {
+  background-color: #4CAF50; /* Зеленый цвет кнопки */
+  color: white;
+  font-size: 18px;
+  padding: 16px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none; /* Запрещаем выделение текста */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button:hover {
+  background-color: #66BB6A; /* Более светлый зеленый при наведении */
+}
+
+.modal-button:active {
+  background-color: #388E3C; /* Более темный зеленый цвет при нажатии */
+}
+
+/* Темный фон для затемнения при открытии модального окна */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: none; /* Изначально скрыто */
+}
+
+
+
+
+#bearCounter {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+  pointer-events: none; /* Делает элемент некликабельным */
+  z-index: 1000; /* Поверх всех других элементов */
+}
+
+#bearIcon {
+  width: 24px;
+  height: 24px;
+}
+
+
+
+
+/* Эффект вспышки фотоаппарата */
+@keyframes cameraFlash {
+  0% { opacity: 0.2; }
+  100% { opacity: 0; }
+}
+
+.flash-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  z-index: 1000;
+  pointer-events: none; /* Делает элемент некликабельным */
+  animation: cameraFlash 0.5s ease-in-out;
+}
+
+/* Эффект красной границы */
+@keyframes redBorderFlash {
+  0% { border-color: rgba(255, 0, 0, 0); }
+  20% { border-color: rgba(255, 0, 0, 1); }
+  100% { border-color: rgba(255, 0, 0, 0); }
+}
+
+.red-border {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 5px solid rgba(255, 0, 0, 0); /* Прозрачный красный, который будет анимироваться */
+  box-sizing: border-box;
+  pointer-events: none; /* Делает элемент некликабельным */
+  z-index: 1000;
+  animation: redBorderFlash 0.5s ease-in-out;
+}

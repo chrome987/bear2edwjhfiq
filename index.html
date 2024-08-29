@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Game Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="overlay"></div>
+
+
+    <div id="content">
+        <div class="overlay">
+            <div class="overlay-helper">
+
+            <div class="darken top"></div>
+            <div class="darken bottom"></div>
+            <div class="darken left"></div>
+            <div class="darken right"></div>
+            
+            <div class="overlay-element top-left">
+                <span class="recording-indicator"></span>
+            </div>
+            
+            <div class="overlay-element top-right"></div>
+            <div class="overlay-element bottom-left"></div>
+            <div class="overlay-element bottom-right"></div>
+
+            <div class="center-top-left"></div>
+            <div class="center-top-right"></div>
+            <div class="center-bottom-left"></div>
+            <div class="center-bottom-right"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bearCounter">
+        <span id="bearCount">0</span>
+        <img src="./images/BearHead.png" width="32" height="28" alt="description of image">
+            
+    </div>
+    
+
+    <div id="checkCenterButton" class="photo-button">
+        <div class="circle"></div>
+        <div class="ring"></div>
+        <i class="fas fa-camera camera-icon"></i>
+    </div>
+    
+
+    <canvas id="gameCanvas"></canvas>
+    <canvas id="effectCanvas"></canvas>
+    <script type="module" src="./test.min.js"></script>
+</body>
+</html>
+
